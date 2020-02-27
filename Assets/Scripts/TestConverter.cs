@@ -10,7 +10,7 @@ public class TestConverter : MonoBehaviour, IConvertGameObjectToEntity
 {
     public int a;
 
-    // private void Awake()
+    // private void Awake(n
     // {
     //     Debug.Log("awake");
     // }
