@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
+﻿using DefaultNamespace;
 using Unity.Entities;
-using Unity.Physics;
+using Unity.Transforms;
 using UnityEngine;
 
 public class TestConverter : MonoBehaviour, IConvertGameObjectToEntity
 {
-    public int a;
-
-    // private void Awake(n
-    // {
-    //     Debug.Log("awake");
-    // }
-
-    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+    private void Awake()
     {
+        Debug.Log("Aw");
+        Debug.Log(GameObject.FindGameObjectWithTag("Player"));
+
         foreach (Transform child in transform)
         {
             child.gameObject.AddComponent<ChildConverter>();
             child.SetParent(null);
-        }
-        
-        var testTag = new TestTag {a = 3};
+        }   
+    }
 
-        dstManager.AddComponentData(entity, testTag);
+    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+    {
+        //dstManager.RemoveComponent<Parent>()
+        //var testTag = new ParentTag {a = 3};
+
+        dstManager.AddComponent<ParentTag>(entity);
     }
 }

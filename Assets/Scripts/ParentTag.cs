@@ -2,8 +2,7 @@
 
 namespace DefaultNamespace
 {
-    public struct TestTag2 : IComponentData
+    public struct ParentTag : IComponentData
     {
-        
     }
 }

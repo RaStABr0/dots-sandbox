@@ -7,10 +7,8 @@ namespace DefaultNamespace
     {
         public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
         {
-            transform.parent = null;
-            //dstManager.AddComponent<TestTag2>(entity);
-            
-            conversionSystem.PostUpdateCommands.AddComponent<TestTag2>(entity);
+            //transform.parent = null;
+            dstManager.AddComponent<ChildTag>(entity);
         }
     }
 }

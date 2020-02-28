@@ -2,8 +2,8 @@
 
 namespace DefaultNamespace
 {
-    public struct TestTag : IComponentData
+    public struct ChildTag : IComponentData
     {
-        public int a;
+        
     }
 }
