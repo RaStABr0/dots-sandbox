@@ -10,43 +10,38 @@ namespace DefaultNamespace
     [WorldSystemFilter(WorldSystemFilterFlags.GameObjectConversion)]
     public class TestConvertSystem : ComponentSystem
     {
-        // protected override void OnStartRunning()
-        // {
-        //     Debug.Log("st");
-        //     var gO = GameObject.FindGameObjectWithTag("Player");
-        //
-        //     var conv = gO.AddComponent<ParentConverter>();
-        //     
-        //     foreach (Transform child in gO.transform)
-        //     {
-        //         conv.children.Add(child);
-        //         Debug.Log("ch");
-        //     }
-        //     
-        //     gO.transform.DetachChildren();
-        // }
-
         protected override void OnUpdate()
         {
-           InitContainer();
+           InitContainers();
         }
 
-        private void InitContainer()
+        private void InitContainers()
         {
             var containers = GameObject.FindObjectsOfType<ContainerTag>().
                 Select(c => c.transform).ToArray();
 
-            foreach (var container in containers)
+            foreach (Transform container in containers)
             {
-                Debug.Log(container);
-                
-                var converter = container.gameObject.AddComponent<ParentConverter>();
+                InitContainer(container);
+            }
+        }
 
-                foreach (Transform child in container)
+        private void InitContainer(Transform container)
+        {
+            Debug.Log(container);
+
+            var converter = container.gameObject.AddComponent<ParentConverter>();
+
+            foreach (Transform child in container)
+            {
+                converter.children.Add(child);
+
+                if (child.childCount > 0)
                 {
-                    converter.children.Add(child);
-                    child.SetParent(null);
+                    InitContainer(child);
                 }
+                
+                child.SetParent(null);
             }
         }
     }
