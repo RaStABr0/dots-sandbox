@@ -11,6 +11,7 @@ public class ParentConverter : MonoBehaviour, IConvertGameObjectToEntity
     
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
+        Debug.Log($"Parent: {gameObject.name} {entity.Index}");
         dstManager.AddComponent<ParentTag>(entity);
         foreach (var child in children)
         {

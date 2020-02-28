@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Unity.Entities;
-using Unity.Scenes;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -28,8 +26,6 @@ namespace DefaultNamespace
 
         private void InitContainer(Transform container)
         {
-            Debug.Log(container);
-
             var converter = container.gameObject.AddComponent<ParentConverter>();
 
             foreach (Transform child in container)
@@ -40,9 +36,9 @@ namespace DefaultNamespace
                 {
                     InitContainer(child);
                 }
-                
-                child.SetParent(null);
             }
+            
+            container.DetachChildren();
         }
     }
 }
